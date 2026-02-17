@@ -1,0 +1,111 @@
+package com.ganesh.cards.controller;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import com.ganesh.cards.dto.requests.CardRequest;
+import com.ganesh.cards.dto.responses.CardResponse;
+import com.ganesh.cards.service.ICardService;
+
+@Tag(
+        description = "REST end points of card ms",
+        name = "Card Controller Microservice"
+)
+@RestController
+@RequestMapping("/cards")
+public class CardController {
+
+    private final ICardService cardService;
+
+    public CardController(ICardService cardService) {
+        this.cardService = cardService;
+    }
+
+    @Operation(
+            description = "Apply a new card"
+    )
+    @ApiResponses(
+            {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Successfully applied the card"
+                    ),
+                    @ApiResponse(
+                            responseCode = "409",
+                            description = "Card already existed with the given mobile number"
+                    )
+            }
+    )
+    @PostMapping
+    public ResponseEntity<CardResponse> applyCard(@RequestBody CardRequest cardRequest) {
+        CardResponse cardResponse = cardService.applyCard(cardRequest);
+        return ResponseEntity.ok(cardResponse);
+    }
+
+    @Operation(
+            description = "Get the card details based on the provided mobile number"
+    )
+    @ApiResponses(
+            {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Successfully get the card details"
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Card not found with given mobile number"
+                    )
+            }
+    )
+    @GetMapping
+    public ResponseEntity<CardResponse> getCardDetails(@RequestParam String mobileNumber) {
+        CardResponse cardResponse = cardService.getCardDetails(mobileNumber);
+        return ResponseEntity.ok(cardResponse);
+    }
+
+    @Operation(
+            description = "Delete card based on provided mobile number"
+    )
+    @ApiResponses(
+            {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Successfully deleted the card"
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Card not found with given mobile number"
+                    )
+            }
+    )
+    @DeleteMapping
+    public ResponseEntity<String> deleteCard(@RequestParam String mobileNumber) {
+        String response = this.cardService.deleteCard(mobileNumber);
+        return ResponseEntity.ok(response);
+    }
+
+    @Operation(
+            description = "Update the card mobile number"
+    )
+    @ApiResponses(
+            {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Successfully updated the card"
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Card not found with the given card id"
+                    )
+            }
+    )
+    @PatchMapping("/{cardId}")
+    public ResponseEntity<CardResponse> updateCard(@PathVariable Long cardId, @RequestParam String mobileNumber) {
+        CardResponse cardResponse = this.cardService.updateCard(cardId, mobileNumber);
+        return ResponseEntity.ok(cardResponse);
+    }
+}
