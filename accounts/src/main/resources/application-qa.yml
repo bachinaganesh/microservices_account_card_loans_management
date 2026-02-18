@@ -1,0 +1,8 @@
+accounts:
+  message: "Welcome to Accounts Microservice"
+  contactDetails:
+    name: "Ganesh QA"
+    email: "ganeshqa@bank.com"
+  onCallSupport:
+    - (+91) 76656890990
+    - (+09) 90087675352

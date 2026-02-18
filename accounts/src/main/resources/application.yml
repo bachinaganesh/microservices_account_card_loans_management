@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: accounts
+  datasource:
+    url: jdbc:mysql://localhost:3306/account_db
+    username: root
+    password: NewPassword123!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+build:
+  version: 1.0
+
+accounts:
+  message: "Welcome to Accounts Microservice"
+  contactDetails:
+    name: "Ganesh DEV"
+    email: "ganeshdev@bank.com"
+  onCallSupport:
+    - (+91) 987665
+    - (+09) 879008

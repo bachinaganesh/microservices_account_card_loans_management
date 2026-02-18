@@ -1,0 +1,8 @@
+accounts:
+  message: "Welcome to Accounts Microservice"
+  contactDetails:
+    name: "Ganesh PROD"
+    email: "ganeshprod@bank.com"
+  onCallSupport:
+    - (+91) 987665
+    - (+09) 879008

@@ -1,5 +1,7 @@
 package com.eazybytes.accounts.controller;
 
+import com.eazybytes.accounts.config.AccountPropertiesConfig;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -32,9 +34,13 @@ import jakarta.validation.Valid;
 public class AccountController {
 
     private final IAccountService accountService;
+    private final AccountPropertiesConfig accountPropertiesConfig;
+    @Value("${build.version}")
+    private String buildVersion;
 
-    public AccountController(IAccountService accountService) {
+    public AccountController(IAccountService accountService, AccountPropertiesConfig accountPropertiesConfig) {
         this.accountService = accountService;
+        this.accountPropertiesConfig = accountPropertiesConfig;
     }
 
     @Operation(
@@ -110,5 +116,15 @@ public class AccountController {
     public ResponseEntity<CustomerResponse> updateAccount(@Valid @RequestBody CustomerRequest customerRequest, @PathVariable Long customerId) {
         CustomerResponse customerResponse = this.accountService.updateAccount(customerRequest, customerId);
         return ResponseEntity.ok().body(customerResponse);
+    }
+
+    @GetMapping("/build-version")
+    public ResponseEntity<String> getBuildVersion() {
+        return ResponseEntity.ok(buildVersion);
+    }
+
+    @GetMapping("/contact-details")
+    public ResponseEntity<AccountPropertiesConfig>  getAccountPropertiesConfig() {
+        return ResponseEntity.ok(accountPropertiesConfig);
     }
 }
