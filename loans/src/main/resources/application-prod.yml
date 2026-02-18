@@ -1,0 +1,8 @@
+loans:
+  message: "Welcome to Loans Microservice"
+  contactDetails:
+    name: "Ganesh PROD"
+    email: "ganeshprod@bank.com"
+  onCallSupport:
+    - (+91) 9876656890990
+    - (+09) 8790087675352

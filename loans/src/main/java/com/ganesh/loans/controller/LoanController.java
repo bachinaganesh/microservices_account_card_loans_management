@@ -1,5 +1,7 @@
 package com.ganesh.loans.controller;
 
+import com.ganesh.loans.config.LoansPropertiesConfig;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,9 +33,14 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class LoanController {
 
     private final ILoanService loanService;
+    private final LoansPropertiesConfig loansPropertiesConfig;
 
-    public LoanController(ILoanService loanService) {
+    @Value("${build.version}")
+    private String buildVersion;
+
+    public LoanController(ILoanService loanService, LoansPropertiesConfig loansPropertiesConfig) {
         this.loanService = loanService;
+        this.loansPropertiesConfig = loansPropertiesConfig;
     }
 
     @Operation(
@@ -109,5 +116,15 @@ public class LoanController {
     public ResponseEntity<String> makePayment(@PathVariable Long loanId, @RequestParam Double amount) {
         String response = loanService.makePayment(loanId, amount);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/build-version")
+    public ResponseEntity<String> getBuildVersion() {
+        return ResponseEntity.ok(buildVersion);
+    }
+
+    @GetMapping("/contact-details")
+    public ResponseEntity<LoansPropertiesConfig> getContactDetails() {
+        return ResponseEntity.ok(loansPropertiesConfig);
     }
 }

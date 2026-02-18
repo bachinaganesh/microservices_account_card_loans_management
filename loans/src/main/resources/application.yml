@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: loans
+  datasource:
+    url: jdbc:mysql://localhost:3306/loan_db
+    username: root
+    password: NewPassword123!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+server:
+  port: 8090
+
+build:
+  version: 1.0
+
+loans:
+  message: "Welcome to Loans Microservice"
+  contactDetails:
+    name: "Ganesh DEV"
+    email: "ganeshdev@bank.com"
+  onCallSupport:
+    - (+91) 9876656890990
+    - (+09) 8790087675352
