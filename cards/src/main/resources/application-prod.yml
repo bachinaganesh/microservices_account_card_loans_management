@@ -1,0 +1,8 @@
+cards:
+  message: "Welcome to Cards Microservice"
+  contactDetails:
+    name: "Ganesh PROD"
+    email: "ganeshprod@bank.com"
+  onCallSupport:
+    - (+91) 98766568
+    - (+09) 87900908

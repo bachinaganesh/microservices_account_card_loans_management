@@ -1,9 +1,11 @@
 package com.ganesh.cards.controller;
 
+import com.ganesh.cards.config.CardsPropertiesConfig;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,9 +22,13 @@ import com.ganesh.cards.service.ICardService;
 public class CardController {
 
     private final ICardService cardService;
+    private final CardsPropertiesConfig cardsPropertiesConfig;
+    @Value("${build.version}")
+    private String buildVersion;
 
-    public CardController(ICardService cardService) {
+    public CardController(ICardService cardService, CardsPropertiesConfig cardsPropertiesConfig) {
         this.cardService = cardService;
+        this.cardsPropertiesConfig = cardsPropertiesConfig;
     }
 
     @Operation(
@@ -107,5 +113,15 @@ public class CardController {
     public ResponseEntity<CardResponse> updateCard(@PathVariable Long cardId, @RequestParam String mobileNumber) {
         CardResponse cardResponse = this.cardService.updateCard(cardId, mobileNumber);
         return ResponseEntity.ok(cardResponse);
+    }
+
+    @GetMapping("/build-version")
+    public ResponseEntity<String> getBuildVersion() {
+        return ResponseEntity.ok(buildVersion);
+    }
+
+    @GetMapping("/contact-details")
+    public ResponseEntity<CardsPropertiesConfig> getContactDetails() {
+        return ResponseEntity.ok(cardsPropertiesConfig);
     }
 }

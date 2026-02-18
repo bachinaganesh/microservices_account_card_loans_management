@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: cards
+  datasource:
+    url: jdbc:mysql://localhost:3306/cards_db
+    username: root
+    password: NewPassword123!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+server:
+  port: 9000
+build:
+  version: "1.0"
+
+cards:
+  message: "Welcome to Cards Microservice"
+  contactDetails:
+    name: "Ganesh DEV"
+    email: "ganeshdev@bank.com"
+  onCallSupport:
+    - (+91) 76778909876
+    - (+09) 56789089763
