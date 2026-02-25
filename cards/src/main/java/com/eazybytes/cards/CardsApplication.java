@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @OpenAPIDefinition(
 		info = @Info(
@@ -16,6 +17,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 )
 @EnableConfigurationProperties(value = {CardsPropertiesConfig.class})
 @SpringBootApplication
+@EnableDiscoveryClient
 public class CardsApplication {
 
 	public static void main(String[] args) {

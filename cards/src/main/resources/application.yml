@@ -2,10 +2,12 @@ spring:
   application:
     name: cards
   datasource:
-    url: jdbc:mysql://localhost:3306/cards_db
     username: root
-    password: NewPassword123!
     driver-class-name: com.mysql.cj.jdbc.Driver
+    password: NewPassword123!
+    url: jdbc:mysql://localhost:3306/cards_db
+  config:
+    import: ${SPRING_CONFIG_IMPORT:optional:configserver:http://localhost:8071/}
   jpa:
     hibernate:
       ddl-auto: update
@@ -15,14 +17,26 @@ spring:
         format_sql: true
 server:
   port: 9000
-build:
-  version: "1.0"
 
-cards:
-  message: "Welcome to Cards Microservice"
-  contactDetails:
-    name: "Ganesh DEV"
-    email: "ganeshdev@bank.com"
-  onCallSupport:
-    - (+91) 76778909876
-    - (+09) 56789089763
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  info:
+    env:
+      enabled: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8070/eureka
+    fetch-registry: true
+    register-with-eureka: true
+
+info:
+  app:
+    name: "Cards"
+    description: "Cards Microservice"
+    version: "1.0"
+
