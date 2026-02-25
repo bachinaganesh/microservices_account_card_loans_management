@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @OpenAPIDefinition(
 	info = @Info(
@@ -17,6 +18,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 )
 @EnableConfigurationProperties(value = {LoansPropertiesConfig.class})
 @SpringBootApplication
+@EnableDiscoveryClient
 public class LoansApplication {
 
 	public static void main(String[] args) {

@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import com.eazybytes.accounts.dto.requests.AccountRequest;
 import com.eazybytes.accounts.dto.requests.CustomerRequest;
 import com.eazybytes.accounts.dto.responses.AccountResponse;
+import com.eazybytes.accounts.dto.responses.CustomerDetailsResponse;
 import com.eazybytes.accounts.dto.responses.CustomerResponse;
 import com.eazybytes.accounts.entities.Account;
 import com.eazybytes.accounts.entities.Customer;
@@ -44,5 +45,14 @@ public class Mapper {
         customerResponse.setMobileNumber(customer.getMobileNumber());
         customerResponse.setId(customer.getId());
         return customerResponse;
+    }
+
+    public static CustomerDetailsResponse mapToCustomerDetailsResponse(Customer customer, CustomerDetailsResponse customerDetailsResponse) {
+        customerDetailsResponse.setId(customer.getId());
+        customerDetailsResponse.setName(customer.getName());
+        customerDetailsResponse.setMobileNumber(customer.getMobileNumber());
+        customerDetailsResponse.setGender(customer.getGender());
+        customerDetailsResponse.setEmail(customer.getMail());
+        return customerDetailsResponse;
     }
 }
